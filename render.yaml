@@ -1,0 +1,23 @@
+databases:
+  - name: Clientes
+    plan: free
+    databaseName: Clientes
+    user: mysite
+
+services:
+  - type: web
+    plan: free
+    name: Clientes
+    runtime: python
+    buildCommand: "./build.sh" # Asegúrate de que este script exista y esté configurado correctamente
+    startCommand: "daphne -p 8000 lab08.asgi:application" # Cambia esto según la estructura de tu proyecto
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: Clientes # Asegúrate de que este nombre coincida con el nombre de tu base de datos
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true # Generará un valor aleatorio para el SECRET_KEY
+      - key: WEB_CONCURRENCY
+        value: 4 # Ajusta según tus necesidades
+
