@@ -10,7 +10,7 @@ services:
     name: Clientes
     runtime: python
     buildCommand: "./build.sh" # Asegúrate de que este script exista y esté configurado correctamente
-    startCommand: "daphne -p 8000 --bind 0.0.0.0 lab08.asgi:application"
+    startCommand: "daphne -p 8000 -b 0.0.0.0 lab08.asgi:application"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
